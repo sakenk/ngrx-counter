@@ -1,7 +1,11 @@
 <main class="main">
   <div class="content">
     <h1>Welcome to NGRX Counter</h1>
-    <app-my-counter></app-my-counter>
+    <!-- <app-my-counter></app-my-counter> -->
+    <app-book-list
+      [books]="(books$ | async) || []"
+      (add)="onAddToCollection($event)"
+    ></app-book-list>
   </div>
 </main>
 <router-outlet />
