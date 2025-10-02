@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MyCounter } from './my-counter/my-counter';
 import { BookList } from './book-list/book-list';
 import { Store } from '@ngrx/store';
 import { GoogleBooksService } from './book-list/books.service';
@@ -13,7 +12,6 @@ import { AsyncPipe } from '@angular/common';
   imports: [
     RouterOutlet,
     AsyncPipe,
-    MyCounter,
     BookList
   ],
   templateUrl: './app.html',
