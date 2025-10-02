@@ -6,13 +6,15 @@ import { GoogleBooksService } from './book-list/books.service';
 import { BooksActions, BooksApiActions } from './state/books.actions';
 import { selectBookCollection, selectBooks } from './state/books.selectors';
 import { AsyncPipe } from '@angular/common';
+import { BookCollection } from './book-collection/book-collection';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
     AsyncPipe,
-    BookList
+    BookList,
+    BookCollection
   ],
   templateUrl: './app.html',
   styleUrl: './app.sass'
@@ -22,8 +24,8 @@ export class App {
   private booksService = inject(GoogleBooksService);
   private store: Store = inject(Store);
   
-  bookCollection$ = this.store.select(selectBookCollection);
   books$ = this.store.select(selectBooks);
+  bookCollection$ = this.store.select(selectBookCollection);
   
   onAdd(bookId: string) {
     this.store.dispatch(BooksActions.addBook({ bookId }));
@@ -39,9 +41,5 @@ export class App {
       .subscribe((books) =>
         this.store.dispatch(BooksApiActions.retrievedBookList({ books }))
       );
-  }
-
-  onAddToCollection(bookId: string) {
-    this.store.dispatch(BooksActions.addBook({ bookId }));
   }
 }
